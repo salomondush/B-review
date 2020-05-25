@@ -1,0 +1,38 @@
+/*variable*/
+$color: white;
+/*inheritance*/
+%message {
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+nav {
+    @extend %message;
+    background-color: $color;
+    overflow: hidden;
+    width: 100%;
+    a {
+        float: left;
+        text-align: center;
+        padding: 10px;
+        font-size: 17px;
+    }
+    a:hover {
+        color: $color;
+        background-color: rgb(10, 10, 10);
+    }
+
+    a.active {
+        color: $color;
+        background-color: royalblue;
+    }
+}
+
+footer {
+    @extend %message;
+    text-align: center;
+}
+
+/*nesting*/
+body {
+    @extend %message;
+}

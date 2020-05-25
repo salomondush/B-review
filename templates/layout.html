@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MySelf</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/Myself.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/query.css') }}">
+    </head>
+    <nav class="screen-only-nav">
+        <a class="active" href="/">Home</a>
+        <a href="/education">Education</a>
+        <a href="/inspirations">Inspirations & Explorations</a>
+        <a href="/hobbies">Hobbies</a>
+    </nav>
+    <hr>
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+    <footer class="screen-only-footer"> <!--text align to left and some margin to seperate it form the footer image.
+    Also, find a way to turn the button text color-->
+        <p>You can click below to check out other additional information of my life</p><br>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary active"><a href="/education">Education</a></button>
+            <button type="button" class="btn btn-primary active"><a href="/inspirations">Inspirations & Explorations</a></button>
+            <button type="button" class="btn btn-primary active"><a href="/hobbies">Hobbies</a></button>
+        </div>
+        <img class='container' src="{{ url_for('static', filename='images/footer.png') }}">
+    </footer>
+</html>

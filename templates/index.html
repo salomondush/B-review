@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<header>
+    <h5>Personal information</h5>
+</header>
+<hr>
+<p>Welcome to this website. I created this website as somekind of a resume. It is going to cover alot 
+    about who I am as a person: hobbies, Inspirations, my education history, and so on. </p>
+<main>   
+    <div>
+        
+            <h6>Family Information</h6>
+                <ul>
+                    <li><strong>First name: </strong>Dushirimana</li>
+                    <li><strong>Last name: </strong> Salomon</li>
+                    <li><strong>Father: </strong> Ntibambaniye Jeremy</li>
+                    <li><strong>Mother: </strong>Mother: Mukansanga Epiphania</li>
+                </ul>
+        
+    </div>
+    <div>
+        <hr>
+        <h6>Siblings</h6>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Last name</th>
+                        <th>first name</th>
+                        <th>Date of birth</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Niyobuhungiro</td>
+                        <td>Chantal</td>
+                        <td>-/-/1996</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>Dusabimana</td>
+                        <td>Joseline</td>
+                        <td>-/-/2003</td>
+                        <td>17</td>
+                    </tr>
+                    <tr>
+                        <td>Dufitimana</td>
+                        <td>Eric</td>
+                        <td>-/-/2007</td>
+                        <td>13</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+    </div>
+    <div>
+        <hr>
+            <h6>Home Addres</h6>
+            <ul>
+                <li>Country: Rwanda</li>
+                <li>City: Kigali</li>
+                <li>Street Number: kk 25 Ave</li>
+            </ul>
+        
+    </div>
+    <div>
+        <hr>
+        <h6>Languages Spoken</h6>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Language</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rwanda</td>
+                    <td>First Language, Speak, Read, Write, Spoken at Home</td>
+                </tr>
+                <tr>
+                    <td>English</td>
+                    <td>Speak, Read, Write</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<div>
+    <hr>
+        <img src="{{ url_for('static', filename='images/email.png') }}"><span>Email</span>
+        <img src="{{ url_for('static', filename='images/linkedin.png') }}"><span>Telephone</span>
+        <img src="{{ url_for('static', filename='images/phone.png') }}"><span>Linked in</span>
+    <hr>
+</div>
+{% endblock %}
