@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<header>
+        <h5>My education history</h5>
+</header>
+<hr>
+<p>This webpage will give a glimpse of my educational history and the address of the schools. Moreover,
+    I will try to include some of my favorite teachers at some of the schools. In total, I attended only
+    schools.
+</p>
+<main>
+    <div>
+        <h5>Most recent school</h5>
+        <hr>
+        <p>Lycee de Kigali, KK 2 Ave, Nyarugenge, Kigali, RWA, Public (01/2013 - 12/2018)</p>
+        <ul>
+            <li><strong>Counselor </strong>Mr. Joseph Mugabo, Teacher</li>
+            <li><strong>Email, Phone</strong> joseph.mugabo@yahoo.com, +250.788404362</li>
+            <li><strong>Progression</strong> Took a gap year</li>
+            <li><strong>Graduation Date  </strong>12/2018</li>
+        </ul>
+    </div>
+    <div>
+        <h5>Second school (Primary) education</h5>
+        <hr>
+        <p>New Life Christians Academy, -- - --, Kayonza, Eastern Province, Rwa, Private (01, 2010 - 12/2012)</p>
+        <ul>
+            <li><strong>Counselor </strong>Mr. Joseph Mugabo, Teacher</li>
+            <li><strong>Email, Phone</strong> joseph.mugabo@yahoo.com, +250.788404362</li>
+            <li><strong>Progression</strong> Took a gap year</li>
+            <li><strong>Graduation Date  </strong>12/2012</li>
+        </ul>
+    </div>
+</main>
+<div>
+    <h5>Current or Most Recent Year Courses</h5>
+    <hr>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>First Trimester</th>
+                <th>Second Trimester</th>
+                <th>third Trimester</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Physics - (ADV)</td>
+                <td>Physics - (ADV)</td>
+                <td>Physics - (ADV)</td>
+            </tr>
+            <tr>
+                <td>Chemistry - (ADV)</td>
+                <td>Chemistry - (ADV)</td>
+                <td>Chemistry - (ADV)</td>
+            </tr>
+            <tr>
+                <td>Math - (ADV)</td>
+                <td>Math - (ADV)</td>
+                <td>Math - (ADV)</td>
+            </tr>
+            <tr>
+                <td>Entrepreneurship - (ADV)</td>
+                <td>Entrepreneurship - (ADV)</td>
+                <td>Entrepreneurship - (ADV)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <hr>
+    <h5>Educational progression after highschool</h5>
+        <p>After my highschool education, I was accepted into one of the top leading Universities
+            in America, Vanderbilt University.
+        </p>
+    <hr>
+    <img id="schoolpic" src="{{ url_for('static', filename='images/vanderbilt.jpg') }}">
+    <ul>
+        <li><strong>School Name</strong>Vanderbilt University</li>
+        <li><strong>Counselor </strong>Mr. Keldrick Stephens, Teacher</li>
+        <li><strong>Email, Phone</strong> keldrick.stephens@vanderbilt.edu</li>
+        <li><strong>Location</strong>United States of America. Tinnesse, Nashville</li>
+        <li><strong>Graduation date</strong>class of 2024</li>
+    </ul>
+</div>
+<hr>
+{% endblock %}
