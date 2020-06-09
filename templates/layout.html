@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Reviews: {% block title %} {% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="{{url_for('static', filename='image/images.png')}}">
+        
+        <title>Signin Template for Bootstrap</title>
+
+       
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/body.css')}}">
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img src="{{url_for ('static', filename='image/images.png')}}" width='30' height='30' class="d-inline-block align-top" alt="">
+                Reviews
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            {% if session.user_id %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Reviews</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ml-auto mt-2">
+                <li class='nav-item'><a class='nav-link' href='/logout'>Logout</a></li>
+              </ul>
+            </div>
+            {% else %}
+            <ul class='navbar-nav ml-auto mt-2'>
+                <li class='nav-item'><a class='nav-link' href='/register'>Register</a></li>
+                <li class='nav-item'><a class='nav-link' href='/login'>Login</a></li>
+            </ul>
+            {% endif %}
+        </nav>
+        <hr>
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+    </body>
+    <hr>
+    <footer class="container">
+      <div>
+        <b>Check us out on social media platforms</b><br>
+        <img src="{{ url_for('static', filename='image/instlogo.jpg')}}" width='20' height='20' class="d-inline-block"><span>Instagram</span>
+        <img src="{{ url_for('static', filename='image/twitter.png')}}" width='20' height='20' class="d-inline-block"><span>Twitter</span>
+        <img src="{{ url_for('static', filename='image/whatsap.png')}}" width='20' height='20' class="d-inline-block"><span>Whatsapp</span>
+      </div> 
+      <div>
+        <strong>Locations & Address</strong><br>
+        Rwanda, Kigali, Street no: kk 25 Ave
+      </div>
+    </footer>
+    <hr>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css')}}">
+<div class="contents1">
+    <div class='text-center'>
+        <form class="form-signin" action='/register' method="post">
+            <img class="mb-4" src="{{url_for ('static', filename='image/images.png')}}" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+    
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input name="pass1" type="password" id="p1" class="form-control" placeholder="Password" required>
+    
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input name="pass2" type="password" id="p2" class="form-control" placeholder="Comfirm password" required>
+    
+            <div id="rem">
+                
+            </div>
+            <div style="color: red;">
+                {{user_error}}
+            </div>
+            <button id="register" class="btn btn-lg btn-success btn-block" type="submit" disabled>Register</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('p2').onkeyup = function() {
+        if (document.getElementById('p2').value == '') {
+            document.getElementById('register').disabled = true;
+        }
+        else {
+            if (document.getElementById('p1').value == document.getElementById('p2').value){
+                document.getElementById('register').disabled = false;
+                document.getElementById('rem').style.color = "green";
+                document.getElementById('rem').innerHTML = "Passwords match!";
+            }
+            else {
+                document.getElementById('register').disabled = true;
+                document.getElementById('rem').style.color = "red";
+                document.getElementById('rem').innerHTML = "Passwords don't match!";
+            }
+        }
+    }
+</script>
+{% endblock %}

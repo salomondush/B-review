@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    book
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h5>Welcome {{username}}</h5>
+    <p>Search any book to submit your reviews or get other peoples reviews</p>
+    <form action="#" method="POST">
+      <input class="form-control mb-4" id="tableSearch" type="text"
+        placeholder="Type something to search list items">
+      <button id='search' class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
+    <h5>Search results</h5>
+    {% if books %}
+      <ul class="list-group" id="myList">
+        {% for book in books %} <!--Loop to display every result returned. Also make sure to add a feature to select book-->
+        <li class="list-group-item"><a href="{{ url_for ('book', book_id = book.id )}}">isbn: {{book.isbn}}, Title: {{book.title}}, Author: {{book.author}}, and released {{book.year}}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div style="color: red;">
+        {{error}}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
