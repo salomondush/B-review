@@ -1,0 +1,27 @@
+
+/*check if when you print, there are no nav or footer*/
+@media print {
+    .screen-only-nav {
+        display: none;
+    }
+    .screen-only-footer {
+        display: none;
+    }
+}
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+#schoolpic {
+    width: 50%;
+    height: 20%;
+}
+/*something to change for small screens*/
+@media (max-width: 699px) {
+    body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+/*Here, I plan to use scss to make a template for the nav, body, and footer. I will also have to make
+another css class child for div of the body to design the size*/
