@@ -1,0 +1,102 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    book
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h5>{{book.title}}</h5>
+        <ul>
+        <li><strong>Author:</strong> {{book.author}}</li>
+        <li><strong>Publication year:</strong> {{book.year}}</li>
+        <li><strong>ISBN number:</strong> {{book.isbn}}</li>
+        </ul>
+        {% if ratings %}
+            <p style="color: royalblue;">Goodreads Average rating: <b>{{ ratings[0] }}</b>, Rating count: <b>{{ ratings[1] }}</b></p>
+        {% else %}
+            <p><strong>No Goodread ratings found</strong></p>
+        {% endif %}
+        <h5>Other users' ratings</h5>
+        <ur class="list-group">
+            {% if user_reviews %}
+                {% for reviews in user_reviews %}
+                <li class="list-group-item">
+                    <strong>Name:</strong> Anonymous<br>
+                    <strong>Rating:</strong> {{reviews.rating}} <br>
+                    <strong>Review:</strong> {{reviews.review}}
+                </li>
+                <hr>
+                {% endfor %}
+            {% else %}
+                <ul>
+                    <li style="color: royalblue;">No user ratings so far</li>
+                </ul>   
+            {% endif %}
+        </ur>
+        <form action='/ratings' method='POST'>
+            <div class="form-group">
+                <label for='review'>Your rating</label>
+                <input name='number' onkeyup="checker()"  type="number" class='form-control' id='review' placeholder='Enter Your rating (not more than 5)' required>
+
+                <div style="color: red;" class='warning'>
+                
+                </div>
+
+                <label for="exampleFormControlTextarea1">Enter your review (characters: <span id='count'>0</span><span>/100</span>)</label>
+                <textarea onkeyup="wordlimit()" id='input' name='review' class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder='Enter your review (not more than 100 characters)' required></textarea>
+                {% if user %}
+                    <div style="color: red;">
+                        You cannot review a book two times!
+                    </div>
+                    <button  class="btn btn-primary" type="submit" disabled>Submit Review</button>
+                {% else %}
+                    <button id="reviewSubmit" class="btn btn-primary" type="submit">Submit Review</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+    <script>
+    function checker() {
+        if (document.getElementById('review').value > 5) {
+        document.getElementById('reviewSubmit').disabled = true;
+        }
+        else {
+        document.getElementById('reviewSubmit').disabled = false;
+        }
+    }
+
+    //word counting section
+    function wordCount( val ){
+    var wom = val.match(/\S+/g);
+    return {
+        charactersNoSpaces : val.replace(/\s+/g, '').length,
+        characters         : val.length,
+        words              : wom ? wom.length : 0,
+        lines              : val.split(/\r*\n/).length
+        };
+    };
+
+    document.addEventListener("DOMContentLoaded", function(){
+
+        //when the key is released in the input
+        document.querySelector("#input").onkeydown = function(){
+
+            document.getElementById('count').innerHTML = wordCount(document.getElementById('input').value).characters;
+   
+        };   
+    });
+
+    //word limit section
+    function wordlimit(){
+
+        //if word count is reached 
+        if (wordCount(document.getElementById('input').value).characters > 100) {
+            document.querySelector("#reviewSubmit").disabled = true;
+        }
+        else {
+            document.querySelector("#reviewSubmit").disabled = false;
+        }
+    }
+    </script>
+{% endblock %}

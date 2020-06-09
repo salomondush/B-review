@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h5>Welcome {{username}}</h5>
+    <p>Search any book to submit your reviews or get other peoples' reviews</p>
+    <form action="#" method="POST">
+      <input name="search" class="form-control mb-4" id="tableSearch" type="text"
+        placeholder="Type something to search list items" required>
+      <button id='search' class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <p><b>Some of the books in our store</b></p>
+    <table id='table1' class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ISBN</th>
+          <th>title</th>
+          <th>Author</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for book in books %}
+        <tr>
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.year }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
