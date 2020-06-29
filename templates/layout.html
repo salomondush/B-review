@@ -1,0 +1,162 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <title>Flack</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design.css')}}">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/control.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <!--A block template for message design-->
+    <script id='message0' type='text/x-handlebars-template'>
+      <div class='text1'>
+        {% raw -%}
+          <img src="../static/images/user.png" width='30' height='30' alt='user' title='user'><span><b>{{ message.[1] }} </b></span><span class='mt-5 mb-3 text-muted'>({{ message.[3] }})</span>
+          <p>{{ message.[2] }}</p>
+        {%- endraw%}
+      </div>
+    </script> 
+    <!--template for non_user channels-->
+    <script id='channels-0' type='text/x-handlebars-template'>
+      <br>
+      <h5>Other channels</h5>
+      {% raw -%}
+        {{#if non_channels}}
+          {{#each non_channels as |channel|}}
+          <li class="list-group-item 0">{{ channel.[0] }}.
+            <span class='badge badge-primary badge-pill'>{{ channel.[1] }}</span>
+            <span><button id='join-channel' class='btn btn-primary'>+Join</button></span>
+          </li>
+          {{/each}}
+        {{/if}}
+      {%- endraw%}
+    </script>
+    <!--block template for displaying messages and charts-->
+    <script id='messages' type='text/x-handlebars-template'>
+      <div class="main">
+        {% raw -%}
+        <div class='head'>
+          <a>{{ channel }} (admin: {{ admin }})</a>
+        </div>
+        <div class='texts-list'>
+            {{#if messages}}
+              {{#each messages as |message|}}
+                <div class='text1'>
+                  <img src="../static/images/user.png" width='30' height='30' alt='user' title='user'><span><b>{{ message.[0] }} </b></span><span class='mt-5 mb-3 text-muted'>({{ message.[2] }})</span>
+                  <p>{{ message.[1] }}</p>
+                </div>
+              {{/each}}
+            {{/if}}
+        </div>
+        {%- endraw%}
+      </div>
+      <form id='message' class='form-group 2'>
+          <input id='text' type='text' class='form-control' placeholder='Enter Your Message' autocomplete="off" required>
+          <p id='error2' style="color: red;"></p>
+          <button class='btn btn-success'>Send</button>
+      </form>
+    </script>
+    <!--block template for displaying private messages-->
+    <script id='private_messages' type='text/x-handlebars-template'>
+      <div class="main">
+        {% raw -%}
+        <div class='head'>
+          <a>{{ user }}</a> <!--insert in the name-->
+        </div>
+        <div class='texts-list'>
+            {{#if messages}}
+              {{#each messages as |message|}}
+                <div class='text1'>
+                  <img src="../static/images/user.png" width='30' height='30' alt='user' title='user'><span><b>{{ message.[0] }} </b></span><span class='mt-5 mb-3 text-muted'>({{ message.[2] }})</span>
+                  <p>{{ message.[1] }}</p>
+                </div>
+              {{/each}}
+            {{/if}}
+        </div>
+        {%- endraw%}
+      </div>
+      <form id='direct-message' class='form-group 3'>
+          <input id='text-1' type='text' class='form-control' placeholder='Enter Your Message' autocomplete="off" required>
+          <p id='error3' style="color: red;"></p>
+          <button class='btn btn-success'>Send</button>
+      </form>
+    </script>
+    <!--Block template for displaying channel users-->
+    <script id='channel-users' type='text/x-handlebars-template'>
+      <ul id='add-direct-user' class='list-group'>
+        {% raw -%}
+          {{#if users}}
+            {{#each users as |user|}}
+              <li class='list-group-item 1'>{{ user }}</li>
+            {{/each}}
+          {{/if}}
+        {%- endraw%}
+        <button  id='hide' class='btn btn-success'>hide</button>
+      </ul>
+    </script>
+    <!--Block template for displaying the channels-->
+    <script id='channels' type='text/x-handlebars-template'>
+      <div>
+        <div class='head'>
+          <a>Channels</a>
+        </div>
+        <div class='container'> 
+          <p></p>
+          <h5>Your channels</h5>
+          <ul id='add-channels' class="list-group list-group-flush channels-list">
+            {% raw -%}
+              {{#if channels}}
+                {{#each channels as |item|}}
+                  <li class="list-group-item">{{ item.[0] }}
+                      <span class='badge badge-primary badge-pill'>{{ item.[1] }}</span>
+                  </li>
+                {{/each}}
+              {{/if}}
+            {%- endraw %}
+          </ul>
+        </div>
+      </div>
+      <div>
+        <form class='form-group 1' id='new-channel'>
+          <input id='channel-name' name='channel'  type='text' class='form-control' placeholder="New Channel Name (Should not exist already)" autocomplete='off' required>
+          <div id='error1' style="color: red;">{{error}}</div>
+          <button id='new' class='btn btn-primary'>+ Channel</button>
+        </form>
+      </div>
+    </script>
+    <style>
+      li {
+          cursor: pointer;
+      }
+      li:hover {
+          opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='row'>
+      <div class="sidenav col-lg-2">
+        <a id='get-channels'href='javascript:void(0)'>Channels List</a>
+        <hr>
+        <a href='javascript:void(0)'><h5>Current Channel</h5></a><span id='current-channel' class='badge badge-success'></span>
+        <ul>
+          <a id='select-users' href='javascript:void(0)'>Users<span id='users-number' class='badge badge-success badge-pill'></span></a>
+        </ul>
+        <hr>
+        <a href="javascript:void(0)"><h5>Direct Messaging</h5></a>
+        <ul id='direct-users'>
+          
+        </ul>
+        <hr>
+        <a href="{{ url_for ('logout')}}">Logout <span class='badge badge-dark'> {{user}}</span></a>
+      </div>
+      <main class="main col-lg-10">
+        
+      </main>
+    </div>
+    <div class='users'>
+
+    </div>
+  </body>
+</html> 
