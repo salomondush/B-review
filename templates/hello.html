@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hello.css')}}">
+    <title>Document</title>
+</head>
+<body class='container mt-3'> 
+    <img src="{{ url_for('static', filename='images/logo.png')}}" width="150" height="150" title='flack logo' alt='flack logo'>
+    <div id='welcome'>
+        <p>Welcome to Flack. You can get in by creating a new display name<br>
+        or using an existing display name. When inside, you'll be able to<br>
+        create new channels or join existing channels</p>
+    </div>
+    <div id='container' class='col-lg-4 col-sm-6'>
+        <h4>Try messaging with Groups</h4>
+        <p>Create a brand-new site for you and your group <br>
+        to socialize</p>
+        <form action='/register' method='POST'>
+            <input name='newName' type="text" class='form-control' placeholder='Enter New Display name' required>
+            <div style="color: red;">{{message1}}</div>
+            <button class='btn btn-primary'>New</button>
+        </form> 
+      
+    </div>
+    <div id='container1' class='col-lg-4 col-sm-6'>
+        <h4>Already have a display name?</h4>
+        <p>Sign in and find you teams work space.<br>
+        <br>
+        </p>
+        <form action='/login' method='POST'>
+            <input name='name' type="text" class='form-control' placeholder='Enter Your Display name' required>
+            <div style="color: red;">{{message}}</div>
+            <button class='btn btn-primary'>Enter</button>
+        </form>
+    </div>
+    <div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+    </div>
+</body>
+</html>
