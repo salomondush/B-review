@@ -1,0 +1,77 @@
+.head, .sidenav, .users {
+  background-color: #111;
+}
+
+#direct-message, #message {
+  background-color: white;
+}
+
+.head {
+  color: #818181;
+  border: 1px solid black;
+  text-align: center;
+  font-size: medium;
+  height: 50px;
+  padding-top: 10px;
+  z-index: 2;
+}
+
+.sidenav {
+  z-index: 1;
+  height: 101vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  color: #818181;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.users {
+  color: #818181;
+  position: fixed;
+  display: none;
+  padding: 10px;
+  width: 230px;
+  top: 50px;
+  right: 0px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+body hr {
+  color: white;
+  background-color: whitesmoke;
+}
+
+.texts-list {
+  height: 78vh;
+  overflow: auto;
+}
+
+.channels-list {
+  height: 70vh;
+  overflow: auto;
+}
+
+@media (max-width: 989px) {
+  body {
+    overflow-y: auto;
+  }
+}
+/*# sourceMappingURL=design.css.map */
