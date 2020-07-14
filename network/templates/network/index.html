@@ -1,0 +1,45 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h3>All Posts</h3>
+    {% if user.is_authenticated %}
+        <div>
+            <div class='new border'>
+                <form id='new-post' class='form-group'>
+                    <label for="textarea"><b>New Post</b></label>
+                    <textarea id="textarea"class='form-control' rows='2'></textarea>
+                    <button class='btn btn-outline-primary'>Post</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+    <p><b>Note:</b>Please keep in mind that without being logged in, you can't like any post follow any user.</p>
+    {% endif %}
+    <hr>
+    <div class='posts'>
+        {% for post in page_obj %}
+            <div id="p{{ post.id }}" class='post border'>
+                <a href="{% url 'profile' post.user.id %}"><b>{{ post.user }}</b></a>
+                <div class='content'>
+                    {{ post.content }}
+                </div>
+                {% if post.user_post %}
+                    <a class="edit" href="javascript:void(0)">Edit</a> <!--work on this later, and also make sure that it is available for current user's posts only-->
+                {% endif %}
+                <article class='text-muted'>{{ post.time }}</article>
+                {% if post.liked %} 
+                    <label class="switch">
+                        <input class="liking" checked type="checkbox">
+                        <div class="slider"></div>
+                    </label>
+                {% else %}
+                    <label class="switch">
+                        <input class="liking" type="checkbox">
+                        <div class="slider"></div>
+                    </label>
+                {% endif %}
+                <div>Likes: <b class='likes-number'>{{ post.likes }}</b></div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

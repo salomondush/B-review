@@ -1,0 +1,68 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+    <div class="profile">
+        <div class='head border'>
+            <div class='rows'>
+                <div class='col-lg-3'>
+                    {% load static %}
+                    <img src="{% static 'network/images/user.png' %}" alt="user" width='75' height='75'>
+                </div>
+                <div class='col-lg-3'>
+                    <p><b>Posts: </b>{{ posts_number }}</p>
+                </div>
+                <div class='col-lg-3'>
+                    <p>Followers: <b id='followers'>{{ followers_number }}</b></p>
+                </div>
+                <div class='col-lg-2'>
+                    <p>Following: <b id='following'>{{ following_number }}</b></p>
+                </div>
+            </div>
+            <p><b class="user-profile" id="u{{ id }}" >=> {{ user_name }}</b></p>
+            {% if follow %}
+                {% if follows %}
+                    <span>
+                        <label class="switch">
+                            <input class="following" checked type="checkbox">
+                            <div class="slider">Follow</div>
+                        </label>
+                    </span>
+                {% else %}
+                    <span>
+                        <label class="switch">
+                            <input class="following" type="checkbox">
+                            <div class="slider">Follow</div>
+                        </label>
+                    </span>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div id='user-posts'>Posts</div>
+        <div class='posts'>
+            {% for post in page_obj %}
+                <div id="p{{ post.id }}" class='post border'>
+                    <a href="{% url 'profile' post.user.id %}"><b>{{ post.user }}</b></a>
+                    <div class='content'>
+                        {{ post.content }}
+                    </div>
+                    {% if post.user_post %}
+                        <a class="edit" href="javascript:void(0)">Edit</a> <!--work on this later, and also make sure that it is available for current user's posts only-->
+                    {% endif %}
+                    <article class='text-muted'>{{ post.time }}</article>
+                    {% if post.liked %} 
+                        <label class="switch">
+                            <input class="liking" checked type="checkbox">
+                            <div class="slider"></div>
+                        </label>
+                    {% else %}
+                        <label class="switch">
+                            <input class="liking" type="checkbox">
+                            <div class="slider"></div>
+                        </label>
+                    {% endif %}
+                    <div>Likes: <b class='likes-number'>{{ post.likes }}</b></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
