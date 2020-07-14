@@ -1,0 +1,32 @@
+.container {
+    padding-top: 100px;
+    text-align: center;
+    width: 30%;  
+}
+
+.error {
+    font-family: 'Times New Roman';
+    color: red;
+}
+
+.post, .new, .head, #user-posts{
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+}
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { 
+    border-radius: 20px; 
+    width: 20px;
+}
+
+.rows > div {
+    display: inline-block;
+}
+#user-posts{
+    text-align: center;
+    background-color:dodgerblue;
+    color: white;
+}
+#user-posts:hover {
+    opacity: 0.9;
+}
