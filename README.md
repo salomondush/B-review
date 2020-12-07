@@ -1,6 +1,9 @@
+NOTE: All projects done throught this course are branched to this project (master). To navigate other projects checkout each branch.
+
+
 # Project 0
 
-Web Programming with Python and 
+Web Programming with Python and and javascript
 
 Website name: MySelf    
     description: This website is going to depict my life, who I am as a person, my aspirations,
